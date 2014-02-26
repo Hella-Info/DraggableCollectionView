@@ -316,9 +316,9 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
                                 [dataSource collectionView:self.collectionView deleteItemAtIndexPath:fromIndexPath];
                             }
                             
-                            // Detele the item
+                            // Delete the item
                             [self.collectionView performBatchUpdates:^{
-                                [self.collectionView deleteItemsAtIndexPaths:@[self.layoutHelper.fromIndexPath]];
+                                [self.collectionView reloadItemsAtIndexPaths:@[self.layoutHelper.fromIndexPath]];
                                 self.layoutHelper.fromIndexPath = nil;
                                 self.layoutHelper.toIndexPath = nil;
                             } completion:nil];
