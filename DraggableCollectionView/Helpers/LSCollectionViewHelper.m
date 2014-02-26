@@ -326,6 +326,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
                             // Remove mock for cell
                             [UIView
                              animateWithDuration:0.3
+                             delay:0 usingSpringWithDamping:1 initialSpringVelocity:1 options:0
                              animations:^{
                                  mockCell.transform = CGAffineTransformMakeScale(0.001f, 0.001f);
                              } completion:^(BOOL finished) {
