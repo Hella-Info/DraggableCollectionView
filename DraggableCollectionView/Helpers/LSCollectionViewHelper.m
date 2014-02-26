@@ -240,7 +240,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             [mockCell removeFromSuperview];
             mockCell = [[UIImageView alloc] initWithFrame:cell.frame];
             mockCellImage = [self imageFromCell:cell];
-            mockCellImageDelete = [mockCellImage imageWithGradientTintColor:[UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5]];
+            mockCellImageDelete = [mockCellImage tintedImageWithColor:[UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5] blendingMode:kCGBlendModeOverlay];
             mockCell.image = mockCellImage;
             mockCenter = mockCell.center;
             [self.collectionView addSubview:mockCell];
