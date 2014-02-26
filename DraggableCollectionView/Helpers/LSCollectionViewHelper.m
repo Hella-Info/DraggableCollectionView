@@ -113,7 +113,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
 
 - (UIImage *)imageFromCell:(UICollectionViewCell *)cell {
     UIGraphicsBeginImageContextWithOptions(cell.bounds.size, cell.layer.cornerRadius, 0.0f);
-    [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
+    [cell drawViewHierarchyInRect:cell.bounds afterScreenUpdates:YES];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
