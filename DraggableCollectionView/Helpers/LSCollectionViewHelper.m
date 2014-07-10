@@ -8,7 +8,6 @@
 #import "UICollectionViewLayout_Warpable.h"
 #import "UICollectionViewDataSource_Draggable.h"
 #import "LSCollectionViewLayoutHelper.h"
-#import "UIImage+Tint.h"
 #import <QuartzCore/QuartzCore.h>
 
 static int kObservingCollectionViewLayoutContext;
@@ -213,6 +212,22 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
     return indexPath;
 }
 
+- (UIImage*)tintedImage:(UIImage*)original withColor:(UIColor *)tintColor blendingMode:(CGBlendMode)blendMode {
+  UIGraphicsBeginImageContextWithOptions(original.size, NO, 0.0f);
+  [tintColor setFill];
+  CGRect bounds = CGRectMake(0, 0, original.size.width, original.size.height);
+  UIRectFill(bounds);
+  [original drawInRect:bounds blendMode:blendMode alpha:1.0f];
+  
+  if (blendMode != kCGBlendModeDestinationIn)
+    [original drawInRect:bounds blendMode:kCGBlendModeDestinationIn alpha:1.0];
+  
+  UIImage *tintedImage = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  
+  return tintedImage;
+}
+
 - (void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender
 {
     if (sender.state == UIGestureRecognizerStateChanged) {
@@ -240,7 +255,7 @@ typedef NS_ENUM(NSInteger, _ScrollingDirection) {
             [mockCell removeFromSuperview];
             mockCell = [[UIImageView alloc] initWithFrame:cell.frame];
             mockCellImage = [self imageFromCell:cell];
-            mockCellImageDelete = [mockCellImage tintedImageWithColor:[UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5] blendingMode:kCGBlendModeOverlay];
+            mockCellImageDelete =  [self tintedImage:mockCellImage withColor:[UIColor colorWithRed:1.0 green:0 blue:0 alpha:0.5] blendingMode:kCGBlendModeOverlay];
             mockCell.image = mockCellImage;
             mockCenter = mockCell.center;
             [self.collectionView addSubview:mockCell];
