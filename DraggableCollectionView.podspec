@@ -20,5 +20,4 @@ Pod::Spec.new do |s|
   s.public_header_files = 'DraggableCollectionView/**/*.h'
 
   s.frameworks = 'CoreGraphics', 'QuartzCore'
-  s.dependency 'RCKit'
 end

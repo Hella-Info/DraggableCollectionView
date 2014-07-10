@@ -1,7 +1,5 @@
 PODS:
   - DraggableCollectionView (0.0.1):
-    - RCKit
-  - RCKit (0.1.0)
 
 DEPENDENCIES:
   - DraggableCollectionView (from `../DraggableCollectionView.podspec`)
